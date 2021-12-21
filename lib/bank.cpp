@@ -1,6 +1,6 @@
 #include <iostream>
 #include "../include/bank.h"
-#include "../include/lab_3.h"
+#include "../include/lab_4.h"
 
 Date::Date(int newDay, int newMonth, int newYear) {
     day = newDay;
@@ -20,27 +20,32 @@ Date::Date() {
     percent = 0;
 }
 
-Сontribution::Сontribution(int newSum, Date newDate, int newPercent) {
+Сontribution::Сontribution(int newNumber, int newSum, Date newDate, int newPercent) {
+    number = newNumber;
     sum = newSum;
     date = newDate;
     percent = newPercent;
 }
 
-SimpleСontribution::SimpleСontribution(int newSum, Date newDate, int newPercent, Date newDateLast): Сontribution(newSum, newDate, newPercent) {
+SimpleСontribution::SimpleСontribution(int newNumber, int newSum, Date newDate, int newPercent, Date newDateLast): Сontribution(newNumber, newSum, newDate, newPercent) {
     dateLast = newDateLast;
 }
 
-UrgentСontribution::UrgentСontribution(int newSum, Date newDate, int newPercent, int newTermOfDepositInMonths): Сontribution(newSum, newDate, newPercent) {
+UrgentСontribution::UrgentСontribution(int newNumber, int newSum, Date newDate, int newPercent, int newTermOfDepositInMonths): Сontribution(newNumber, newSum, newDate, newPercent) {
     termOfDepositInMonths = newTermOfDepositInMonths;
 }
 
-CurrencyСontribution::CurrencyСontribution(int newSum, Date newDate, int newPercent, Date newDateLast, Сurrency newCurr, int newExchangeRate): SimpleСontribution(newSum, newDate, newPercent, newDateLast) {
+CurrencyСontribution::CurrencyСontribution(int newNumber, int newSum, Date newDate, int newPercent, Date newDateLast, Сurrency newCurr, int newExchangeRate): SimpleСontribution(newNumber, newSum, newDate, newPercent, newDateLast) {
     curr = newCurr;
     exchangeRate = newExchangeRate;
 }
 
 std::string Date::getDate() {
     return std::to_string(day) + "." + std::to_string(month) + "." + std::to_string(year);
+}
+
+int Сontribution::getNumber() {
+    return number;
 }
 
 int Сontribution::getSum() {
@@ -55,12 +60,10 @@ int Сontribution::getPercent() {
     return percent;
 }
 
-std::string Сontribution::showAll() {
-    return "hello";
-}
-
 std::string SimpleСontribution::showAll() {
-    std::string res = "\nType: ";
+    std::string res = "\nNumber: ";
+    res.append(std::to_string(getNumber()));
+    res.append("\nType: ");
     res.append("SimpleСontribution\n");
     res.append("Sum: ");
     res.append(std::to_string(getSum()));
@@ -85,7 +88,9 @@ int UrgentСontribution::getTermOfDepositInMonths() {
 }
 
 std::string UrgentСontribution::showAll() {
-    std::string res = "\nType: ";
+    std::string res = "\nNumber: ";
+    res.append(std::to_string(getNumber()));
+    res.append("\nType: ");
     res.append("UrgentСontribution\n");
     res.append("Sum: ");
     res.append(std::to_string(getSum()));
@@ -110,7 +115,9 @@ int CurrencyСontribution::getExchangeRate() {
 }
 
 std::string CurrencyСontribution::showAll() {
-    std::string res = "\nType: ";
+    std::string res = "\nNumber: ";
+    res.append(std::to_string(getNumber()));
+    res.append("\nType: ");
     res.append("CurrencyСontribution\n");
     res.append("Sum: ");
     res.append(std::to_string(getSum()));
