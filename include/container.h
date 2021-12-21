@@ -1,41 +1,84 @@
 #pragma once /* Защита от двойного подключения заголовочного файла */
 #include "bank.h"
 
-//class List {
-//private:
-//
-//    std::deque<Сontribution *> list;
-//
-//public:
-//
-//    List();
-//    ~List();
-//
-//    Сontribution * getItem();
-//    void push(Сontribution * item);
-//    void pop_back(int number);
-//};
-
+template <typename T>
 struct Node {
     int number;
-    Сontribution * data;
-    Node * next;
+    T data;
+    Node<T> * next;
+    Node<T> * after;
 };
 
-template <class Eny>
+template <typename T>
 class List {
     private:
     
-        int count;
-        Node * array; // Сделать для любого типа данных (с помощью template?)
+        int count = 0;
+        Node<T> * array = nullptr;
     
     public:
     
-        List();
-        ~List();
+        List() {
+            count = 0;
+        }
     
-        void append(int newNumber, Сontribution * newData);
-        Сontribution * getItem();
-        Node * operator[] (int iteration);
+        ~List() {
+            if (array != nullptr) {
+                for (int i = 0; i < count; i++) { // for (auto i : list) {}
+                    Node<T> * tmp = array;
+                    delete array->data;
+                    array = array->next;
+                    delete tmp;
+                }
+            }
+        }
+    
+        Node<T> * operator[] (int iteration) { // Даёт доступ к объекту под индексом iteration
+            if (count != 0) {
+                if ((iteration > count - 1) || (iteration < (-1) * count)) {
+                    throw std::logic_error("out of range!");
+                } else {
+                    if (iteration < 0) {
+                        iteration = count + iteration;
+                    }
+    
+                    Node<T> * tmp = array;
+    
+                    for (int i = 0; i < count; i++) {
+                        if (i == iteration) {
+                            return tmp;
+                        } else {
+                            tmp = tmp->next;
+                        }
+                    }
+                }
+            } else {
+                throw std::logic_error("list is empty!");
+            }
         
+            return nullptr;
+        }
+    
+        void append(int newNumber, T newData) { // Добавляет элемент в конец списка
+            Node<T> * tmp = new Node<T>;
+            tmp->number = newNumber;
+            tmp->data = newData;
+            tmp->next = nullptr;
+    
+            if (count == 0) {
+                array = tmp;
+            } else {
+                (*this)[-1]->next = tmp;
+            }
+    
+            count++;
+        }
+    
+        int getCount() {
+            return count;
+        }
+    
+//    void del (int iteration) {
+//        
+//    }
 };

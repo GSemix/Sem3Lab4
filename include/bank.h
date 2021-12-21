@@ -30,7 +30,8 @@ class Сontribution {
         Сontribution(int newSum, Date newDate, int newPercent);
 
     public:
-
+        virtual ~Сontribution() = default;
+    
         int getSum();
         std::string getDate();
         int getPercent();
