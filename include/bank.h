@@ -32,13 +32,15 @@ class Сontribution { // Абстрактный класс, использует
 
     public:
     
-        virtual ~Сontribution() = default; // Пустой виртуальных деструктор(создал, потому что ругался компилятор)
+        virtual ~Сontribution() = default; // Пустой виртуальных деструктор // 
     
         int getSum(); // Возвращяет сумму
         std::string getDate(); // Возвращяет дату открытия счёта
         int getPercent(); // Возвращяет ежемесячный процент
         int getNumber(); // Возвращяет номер счёта
-        virtual std::string showAll() = 0; // Виртуальная пустая функция. Реализация не будет наследоваться!
+//        virtual std::string showAll() = 0; // Виртуальная пустая функция. Реализация не будет наследоваться!
+        virtual std::string showAll();
+//        void setSum(int newSum);
 };
 
 class SimpleСontribution: public Сontribution { // Класс простых вкладов

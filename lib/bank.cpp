@@ -14,11 +14,15 @@ Date::Date() {
     year = 0;
 }
 
-Сontribution::Сontribution() {
-    sum = 0;
-    date = Date();
-    percent = 0;
+std::string Сontribution::showAll() {
+    return "Hello";
 }
+
+//Сontribution::Сontribution() {
+//    sum = 0;
+//    date = Date();
+//    percent = 0;
+//}
 
 Сontribution::Сontribution(int newNumber, int newSum, Date newDate, int newPercent) {
     number = newNumber;
@@ -136,3 +140,8 @@ std::string CurrencyСontribution::showAll() {
     
     return res;
 }
+
+
+// Что такое полиморфизм в с++ и чем отличается от наследования
+// Где работает?
+// Что такое абстрактный класс

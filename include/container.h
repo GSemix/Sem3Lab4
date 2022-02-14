@@ -3,7 +3,7 @@
 
 template <typename T> // Тип данных, который будет храниться в struct Node (ВАЖНО: типом должен быть обязательно УКАЗАТЕЛЕМ!!!)
 struct Node { // Структура для хранения указателей на объекты
-    T data; // Информация
+    T & data; // Информация
     Node<T> * next; // Указатель на ПРАВЫЙ элемент
     Node<T> * after; // Указатель на ЛЕВЫЙ элемент
 };
@@ -25,7 +25,7 @@ class List { // Класс, объект которого хранит в себ
             if (count != 0) { // Если список не пустой
                 for (int i = 0; i < count; i++) { // for (auto i : list) {}
                     Node<T> * tmp = array;
-                    delete array->data;
+                    //delete array->data;
                     array = array->next;
                     delete tmp;
                 }
@@ -73,40 +73,42 @@ class List { // Класс, объект которого хранит в себ
     
             count++;
         }
-    
-        int getCount() { // Возвращает кол-во элементов списка
-            return count;
-        }
-    
-        void del(int iteration) { // Удаляет по номеру в списке
-            if (count != 0) { // Если список не пустой
-                if (iteration == 0 || iteration == (-1) * count) { // Если нулевой индекс
-                    Node<T> * tmp = array;
-                
-                    array = array->next;
-                    delete tmp->data;
-                    delete tmp;
-                } else {
-                    Node<T> * tmp = (*this)[iteration];
-                
-                    tmp->after->next = tmp->next;
-                    delete tmp->data;
-                    delete tmp;
-                }
-            
-                count--;
-            } else {
-                throw std::logic_error("list is empty!"); // const exception & mess
-            }
-        }
-    
-        void swap(int a, int b) { // Меняет местами a-ый и b-ый элемент списка (меняет data)
-            if (count != 0) { // Если список не пустой
-                T tmp = (*this)[a]->data;
-                (*this)[a]->data = (*this)[b]->data;
-                (*this)[b]->data = tmp;
-            } else {
-                throw std::logic_error("list is empty!");
-            }
-        }
+//    
+//        int getCount() { // Возвращает кол-во элементов списка
+//            return count;
+//        }
+//    
+//        void del(int iteration) { // Удаляет по номеру в списке
+//            if (count != 0) { // Если список не пустой
+//                if (iteration == 0 || iteration == (-1) * count) { // Если нулевой индекс
+//                    Node<T> * tmp = array;
+//                
+//                    array = array->next;
+//                    delete tmp->data;
+//                    delete tmp;
+//                } else {
+//                    Node<T> * tmp = (*this)[iteration];
+//                
+//                    tmp->after->next = tmp->next;
+//                    delete tmp->data;
+//                    delete tmp;
+//                }
+//            
+//                count--;
+//            } else {
+//                throw std::logic_error("list is empty!"); // const exception & mess
+//            }
+//        }
+//    
+//        void swap(int a, int b) { // Меняет местами a-ый и b-ый элемент списка (меняет data)
+//            if (count != 0) { // Если список не пустой
+//                if (a != b && a != b + count) {
+//                    T tmp = (*this)[a]->data;
+//                    (*this)[a]->data = (*this)[b]->data;
+//                    (*this)[b]->data = tmp;
+//                }
+//            } else {
+//                throw std::logic_error("list is empty!");
+//            }
+//        }
 };

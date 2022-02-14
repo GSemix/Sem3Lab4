@@ -23,6 +23,29 @@ std::string currencyToString(Сurrency curr) {
     }
 }
 
-//void sortBankList(List & list) {
+//int getIndexOfMaxNumber (const Node<Сontribution *> * array) {
+//    int maxNum = 0;
+//    int j = 0;
+//    int i = 0;
 //    
+//    while (array != nullptr) {
+//        if (array->data->getNumber() > maxNum) {
+//            maxNum = array->data->getNumber();
+//            j = i;
+//        }
+//        
+//        array = array->next;
+//        i++;
+//    }
+//    
+//    return j;
+//}
+//
+//void sortBankList(List<Сontribution *> & list) {
+//    int index = 0;
+//
+//    for (int i = 0; i < list.getCount(); i++) {
+//        index = getIndexOfMaxNumber(list[i]);
+//        list.swap(i, i + index);
+//    }
 //}
